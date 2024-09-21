@@ -18,15 +18,18 @@ export class ReservationsService {
     return this.reservationRepository.find({});
   }
 
-  findOne(id: number) {
-    return this.reservationRepository.findOne()
+  findOne(id: string) {
+    return this.reservationRepository.findOne({ _id: id });
   }
 
-  update(id: number, updateReservationDto: UpdateReservationDto) {
-    return `This action updates a #${id} reservation`;
+  update(id: string, updateReservationDto: UpdateReservationDto) {
+    this.reservationRepository.findOneAndUpdate(
+      { _id: id },
+      { $set: updateReservationDto },
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} reservation`;
+  remove(id: string) {
+    this.reservationRepository.findOneAndDelete({ _id: id });
   }
 }

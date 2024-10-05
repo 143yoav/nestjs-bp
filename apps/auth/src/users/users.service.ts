@@ -37,7 +37,7 @@ export class UsersService {
   private async validateCreateUserDto(createUserDto: CreateUserDto) {
     try {
       this.usersRepository.findOne({ email: createUserDto.email });
-    } catch (error) {
+    } catch {
       return;
     }
 

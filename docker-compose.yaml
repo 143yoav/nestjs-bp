@@ -15,15 +15,28 @@ services:
     build:
       context: .
       dockerfile: apps/auth/Dockerfile
-      
       target: development
     command: pnpm run start:dev auth
     env_file: 
       - apps/auth/.env
     ports:
       - '3001:3001'
+      - "9230:9229"
     volumes:
       - .:/usr/src/app    
+  notifications:
+    build:
+      context: .
+      dockerfile: apps/notifications/Dockerfile
+      target: development
+    command: pnpm run start:dev notifications
+    env_file: 
+      - apps/notifications/.env
+    ports:
+      - '3003:3003'
+      - "9231:9229"
+    volumes:
+      - .:/usr/src/app 
   mongo:
     image: mongo
     
